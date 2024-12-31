@@ -544,7 +544,7 @@ static void ondemand_readahead(struct readahead_control *ractl,
 	 * standalone, small random read
 	 * Read as is, and do not pollute the readahead state.
 	 */
-	do_page_cache_ra(ractl, req_size, 0);
+	do_page_cache_ra(ractl, req_size, 0, 0);
 	return;
 
 initial_readahead:
@@ -571,7 +571,7 @@ readit:
 	}
 
 	ractl->_index = ra->start;
-	do_page_cache_ra(ractl, ra->size, ra->async_size);
+	do_page_cache_ra(ractl, ra->size, ra->async_size, ra->back_async_size);
 }
 
 void page_cache_sync_ra(struct readahead_control *ractl,
