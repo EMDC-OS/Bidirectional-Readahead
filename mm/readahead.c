@@ -42,7 +42,6 @@ void
 file_ra_state_init(struct file_ra_state *ra, struct address_space *mapping)
 {
 	ra->ra_pages = inode_to_bdi(mapping->host)->ra_pages;
-	PrintK("[PoohReum] Window Size is : %d", ra->ra_pages)
 	ra->prev_pos = -1;
 }
 EXPORT_SYMBOL_GPL(file_ra_state_init);
@@ -476,7 +475,6 @@ static void ondemand_readahead(struct readahead_control *ractl,
 		ra->size = get_next_ra_size(ra, max_pages);
 		ra->async_size = ra->size;
 		ra->back_async_size = 0;
-		//printk("[PoohReum] readahead.c : Ahead readahead hit, ra->size = %ld, ra->backward = %ld, ra->start = %ld, Current Access = %ld", ra->size, ra->back_async_size, ra->start, ractl->_index);
 		goto readit;
 	}
 
@@ -488,7 +486,6 @@ static void ondemand_readahead(struct readahead_control *ractl,
 		ra->start = max_t(long, 0, ra->start - ra->size);
 		ra->async_size = 0;
 		ra->back_async_size = ra->start == 0 ? 0 : ra->size;
-		//printk("[PoohReum] readahead.c : Backward readahead hit, ra->size = %ld, ra->backward = %ld, ra->start = %ld, Current Access = %ld", ra->size, ra->back_async_size, ra->start, ractl->_index);
 		goto readit;
 	}
 
