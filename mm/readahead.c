@@ -475,6 +475,8 @@ static void ondemand_readahead(struct readahead_control *ractl,
 		ra->start += ra->size;
 		ra->size = get_next_ra_size(ra, max_pages);
 		ra->async_size = ra->size;
+		ra->back_async_size = 0;
+		//printk("[PoohReum] readahead.c : Ahead readahead hit, ra->size = %ld, ra->backward = %ld, ra->start = %ld, Current Access = %ld", ra->size, ra->back_async_size, ra->start, ractl->_index);
 		goto readit;
 	}
 
