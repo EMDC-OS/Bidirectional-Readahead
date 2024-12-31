@@ -29,6 +29,9 @@
 #include "ext4_extents.h"
 #include "ext4_jbd2.h"
 
+
+
+
 static inline loff_t ext4_verity_metadata_pos(const struct inode *inode)
 {
 	return round_up(inode->i_size, 65536);
