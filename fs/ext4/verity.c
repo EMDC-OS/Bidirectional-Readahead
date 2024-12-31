@@ -380,7 +380,7 @@ static struct page *ext4_read_merkle_tree_page(struct inode *inode,
 		if (page)
 			put_page(page);
 		else if (num_ra_pages > 1)
-			page_cache_ra_unbounded(&ractl, num_ra_pages, 0);
+			page_cache_ra_unbounded(&ractl, num_ra_pages, 0, 0);
 		page = read_mapping_page(inode->i_mapping, index, NULL);
 	}
 	return page;
