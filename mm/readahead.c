@@ -306,7 +306,7 @@ void force_page_cache_ra(struct readahead_control *ractl,
 		if (this_chunk > nr_to_read)
 			this_chunk = nr_to_read;
 		ractl->_index = index;
-		do_page_cache_ra(ractl, this_chunk, 0);
+		do_page_cache_ra(ractl, this_chunk, 0,0);
 
 		index += this_chunk;
 		nr_to_read -= this_chunk;
