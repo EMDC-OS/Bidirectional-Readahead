@@ -4057,7 +4057,7 @@ static int redirty_blocks(struct inode *inode, pgoff_t page_idx, int len)
 	pgoff_t redirty_idx = page_idx;
 	int i, page_len = 0, ret = 0;
 
-	page_cache_ra_unbounded(&ractl, len, 0);
+	page_cache_ra_unbounded(&ractl, len, 0, 0);
 
 	for (i = 0; i < len; i++, page_idx++) {
 		page = read_cache_page(mapping, page_idx, NULL, NULL);
