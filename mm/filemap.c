@@ -119,6 +119,8 @@
  *   ->tasklist_lock            (memory_failure, collect_procs_ao)
  */
 
+static unsigned long hookingIndex = -1;
+
 static void page_cache_delete(struct address_space *mapping,
 				   struct page *page, void *shadow)
 {
