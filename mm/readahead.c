@@ -26,6 +26,14 @@
 
 #include "internal.h"
 
+#define USE_PRINTK 1
+
+#if USE_PRINTK
+#define PrintK(x,y) if(!strcmp("mmaper.c",current->comm)){printk(x,y);}
+#else
+#define COV_ON(x)
+#endif
+
 /*
  * Initialise a struct file's readahead state.  Assumes that the caller has
  * memset *ra to zero.
