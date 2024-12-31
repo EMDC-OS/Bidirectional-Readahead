@@ -26,7 +26,7 @@
 
 #include "internal.h"
 
-#define USE_PRINTK 1
+#define USE_PRINTK 0
 
 #if USE_PRINTK
 #define PrintK(x,y) if(!strcmp("mmaper.c",current->comm)){printk(x,y);}
