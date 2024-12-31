@@ -258,7 +258,7 @@ EXPORT_SYMBOL_GPL(page_cache_ra_unbounded);
  * We really don't want to intermingle reads and writes like that.
  */
 void do_page_cache_ra(struct readahead_control *ractl,
-		unsigned long nr_to_read, unsigned long lookahead_size)
+		unsigned long nr_to_read, unsigned long lookahead_size, unsigned long lookrear_size)
 {
 	struct inode *inode = ractl->mapping->host;
 	unsigned long index = readahead_index(ractl);
@@ -271,11 +271,11 @@ void do_page_cache_ra(struct readahead_control *ractl,
 	end_index = (isize - 1) >> PAGE_SHIFT;
 	if (index > end_index)
 		return;
-	/* Don't read past the page containing the last byte of the file */
+	/* Don't read bpast the page containing the last byte of the file */
 	if (nr_to_read > end_index - index)
 		nr_to_read = end_index - index + 1;
 
-	page_cache_ra_unbounded(ractl, nr_to_read, lookahead_size);
+	page_cache_ra_unbounded(ractl, nr_to_read, lookahead_size, lookrear_size - 1);
 }
 
 /*
