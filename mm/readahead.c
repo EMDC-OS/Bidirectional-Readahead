@@ -181,7 +181,7 @@ out:
  * May sleep, but will not reenter filesystem to reclaim memory.
  */
 void page_cache_ra_unbounded(struct readahead_control *ractl,
-		unsigned long nr_to_read, unsigned long lookahead_size)
+		unsigned long nr_to_read, unsigned long lookahead_size, unsigned long lookrear_size)
 {
 	struct address_space *mapping = ractl->mapping;
 	unsigned long index = readahead_index(ractl);
@@ -235,10 +235,12 @@ void page_cache_ra_unbounded(struct readahead_control *ractl,
 			continue;
 		}
 		if (i == nr_to_read - lookahead_size)
-			SetPageReadahead(page);
+			SetPageReadahead(page);		
+		if (i == lookrear_size){
+			SetPageReadahead(page);	
+		}
 		ractl->_nr_pages++;
 	}
-
 	/*
 	 * Now start the IO.  We ignore I/O errors - if the page is not
 	 * uptodate then the caller will launch readpage again, and
