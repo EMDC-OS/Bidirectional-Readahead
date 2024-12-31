@@ -2814,7 +2814,7 @@ static struct file *do_sync_mmap_readahead(struct vm_fault *vmf)
 	ra->size = ra->ra_pages;
 	ra->async_size = ra->ra_pages / 4;
 	if(ra->start){
-		ra->back_async_size = 0;//ra->async_size;
+		ra->back_async_size = ra->async_size;
 	}else{
 		ra->back_async_size = 0;
 	}
