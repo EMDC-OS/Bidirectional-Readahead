@@ -481,6 +481,18 @@ static void ondemand_readahead(struct readahead_control *ractl,
 	}
 
 	/*
+	 * Backward sequential read check
+	 */
+	if (index == (ra->start + ra->back_async_size - 1)) {
+		ra->size = get_next_ra_size(ra, max_pages);
+		ra->start = max_t(long, 0, ra->start - ra->size);
+		ra->async_size = 0;
+		ra->back_async_size = ra->start == 0 ? 0 : ra->size;
+		//printk("[PoohReum] readahead.c : Backward readahead hit, ra->size = %ld, ra->backward = %ld, ra->start = %ld, Current Access = %ld", ra->size, ra->back_async_size, ra->start, ractl->_index);
+		goto readit;
+	}
+
+	/*
 	 * Hit a marked page without valid readahead state.
 	 * E.g. interleaved reads.
 	 * Query the pagecache for async_size, which normally equals to
